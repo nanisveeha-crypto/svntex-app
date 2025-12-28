@@ -11,16 +11,15 @@ const ShopifyProducts = () => {
     const fetchProducts = async () => {
       try {
         // Fetch Products from Shopify using our secure serverless function.
-        // The function will securely access the credentials from the database on its own.
         const response = await fetch('/.netlify/functions/shopify-products', {
-          method: 'POST', // We can still use POST for the request
+          method: 'GET',
         });
 
         if (!response.ok) {
             const errorData = await response.json();
             // Use a more user-friendly error message
-            const errorMessage = errorData.error.includes("not found") 
-                ? 'Shopify credentials not found. Please add them in the Shopify settings page.'
+            const errorMessage = errorData.error.includes("configuration error") 
+                ? 'Shopify credentials are not set in the Netlify environment. Please contact support.'
                 : errorData.error || 'Failed to fetch products from Shopify.';
             throw new Error(errorMessage);
         }
