@@ -1,0 +1,33 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // By default, deny all reads and writes
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Allow read/write access to a user's own document if they are authenticated
+    match /users/{userId} {
+      allow read, update, delete: if request.auth != null && request.auth.uid == userId;
+      allow create: if request.auth != null;
+    }
+
+    // Allow read/write access to affiliates' documents
+    match /affiliates/{affiliateId} {
+      allow read, write: if true; // In a real app, you'd restrict this further
+    }
+
+    // Allow read/write access to orders
+    match /orders/{orderId} {
+        allow read, write: if true; // In a real app, you'd restrict this further
+    }
+
+    // Allow read access to global company data
+    match /globals/company_stats {
+        allow read: if true; // Publicly readable stats
+        allow write: if false; // Only backend can write
+    }
+  }
+}
