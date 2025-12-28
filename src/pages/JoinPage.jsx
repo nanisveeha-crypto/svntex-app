@@ -3,18 +3,14 @@ import { Container, Typography, Button, Box, Paper } from '@mui/material';
 import { ArrowForward } from '@mui/icons-material';
 
 // --- CONFIGURATION --- 
-// TODO: Replace this placeholder with the actual URL to your Shopify product.
-const SHOPIFY_JOIN_URL = 'https://your-store.myshopify.com/products/affiliate-join-product'; // Example URL
+// This is the direct link to the Shopify product that a user must purchase to join the affiliate program.
+const SHOPIFY_JOIN_URL = 'https://mysvntex.in/products/affiliate-training-fee?variant=47349566636276';
 
 const JoinPage = () => {
 
   const handleJoinNow = () => {
-    if (!SHOPIFY_JOIN_URL.includes('your-store')) {
-        window.location.href = SHOPIFY_JOIN_URL;
-    } else {
-        alert('Shopify integration is not configured yet. Please update the placeholder URL in the code.');
-        console.log(`User would be redirected to: ${SHOPIFY_JOIN_URL}`);
-    }
+    // Redirect the user directly to the Shopify product page.
+    window.location.href = SHOPIFY_JOIN_URL;
   };
 
   return (
@@ -44,10 +40,10 @@ const JoinPage = () => {
           
           <Box sx={{ my: 4 }}>
             <Typography variant="h4" component="p" sx={{ fontWeight: 'bold' }}>
-              Joining Fee: ₹4,000
+              Affiliate Training Fee: ₹4,000
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              (One-time payment for the Affiliate Join Product)
+              (One-time payment to join the program)
             </Typography>
           </Box>
 
